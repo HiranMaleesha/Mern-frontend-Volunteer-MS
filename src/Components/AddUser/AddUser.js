@@ -24,11 +24,11 @@ function AddUser() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(inputs);
-    sendRequest().then(() => history('userdetails'))
+    sendRequest().then(() => history('/userdetails'))
   }
 
   const sendRequest = async()=>{
-    await axios.post("http://Localhost:5000/users",
+    await axios.post("http://localhost:5000/users",
       {
         name : String(inputs.name),
         Gmail : String(inputs.Gmail),
