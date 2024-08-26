@@ -1,0 +1,53 @@
+/* Container for the user details */
+.user-container {
+    padding: 20px;
+    margin: 10px auto;
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+}
+
+/* User information styling */
+.user-info {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 1.2em;
+}
+
+/* Link styling for the update button */
+.user-update-button {
+    padding: 10px 20px;
+    font-size: 1.1em;
+    color: #fff;
+    background-color: #28a745; /* Green color for the Update button */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 10px;
+}
+
+/* Hover effect for the update button */
+.user-update-button:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+/* Delete button styling */
+.user-delete-button {
+    padding: 10px 20px;
+    font-size: 1.1em;
+    color: #fff;
+    background-color: #dc3545; /* Red color for the Delete button */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Hover effect for the delete button */
+.user-delete-button:hover {
+    background-color: #c82333; /* Darker red on hover */
+}

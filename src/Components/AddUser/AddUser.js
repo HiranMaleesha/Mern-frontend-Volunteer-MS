@@ -2,6 +2,7 @@ import React, { useState  } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Nav from '../Nav/Nav';
 import axios from 'axios';
+import './AddUser.css'; 
 
 function AddUser() {
 
@@ -21,10 +22,12 @@ function AddUser() {
        }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(inputs);
-    sendRequest().then(() => history('/userdetails'))
+    await sendRequest() ;
+    window.alert("user added successfully!");
+    history('/userdetails');
   }
 
   const sendRequest = async()=>{

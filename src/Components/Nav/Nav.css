@@ -1,34 +1,64 @@
+/* Styling for the sidebar container */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: linear-gradient(135deg, #1d2b64, #f8cdda);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
 
-.home-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+/* Styling for the list */
+.sidebar-ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styling for list items */
+.sidebar-li {
+  margin: 20px 0;
+}
+
+/* Styling for links */
+.sidebar-link {
+  text-decoration: none;
+  color: white;
+  font-size: 1.5em;
+  font-weight: 500;
+  padding: 15px 25px;
+  display: block;
+  border-radius: 8px;
+  transition: background 0.3s, transform 0.3s;
+}
+
+/* Hover effects for links */
+.sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(10px);
+}
+
+/* Active state styling */
+.sidebar-link.active {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateX(10px);
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
   }
-  
-  /* Style the list items */
-  .home-ll {
-    float: left;
+
+  .sidebar-link {
+    font-size: 1.2em;
+    padding: 10px 20px;
   }
-  
-  /* Style the links inside the list items */
-  .home-ll h1 {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 20px;
-    text-decoration: none;
-    margin: 0;
-    font-size: 1.5rem;
-  }
-  
-  /* Change the color on hover */
-  .home-ll h1:hover {
-    background-color: #111;
-    cursor: pointer;
-  }
-  
+}

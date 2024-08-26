@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import './UpdateUser.css';
 
 function UpdateUser() {
     const [inputs, setInputs] = useState({
@@ -48,6 +49,7 @@ function UpdateUser() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await sendRequest();
+        window.alert("User details updted successfully");
         history('/userdetails');
     };
 
