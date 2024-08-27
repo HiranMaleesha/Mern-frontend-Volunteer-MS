@@ -1,6 +1,5 @@
 import React, { useState  } from 'react'
 import { useNavigate } from 'react-router-dom';
-import Nav from '../Nav/Nav';
 import axios from 'axios';
 import './AddUser.css'; 
 
@@ -43,7 +42,6 @@ function AddUser() {
 
   return (
     <div>
-        <Nav/>
       <h1>Add User</h1>
 
       <form onSubmit={handleSubmit}>
