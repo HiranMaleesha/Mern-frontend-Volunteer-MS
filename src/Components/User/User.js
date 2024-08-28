@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import './User.css';
 
 function User(props) {
-  const { _id, name, Gmail, ContactNo, address } = props.user;
+  const { _id, name, Gmail, ContactNo, address,role } = props.user;
   const navigate = useNavigate();
 
   const deleteHandler = async () => {
@@ -23,15 +23,17 @@ function User(props) {
   };
 
   return (
-    <div className="volunteer">
-      <h2>Volunteer Information</h2>
+    <div className="volunteer-card">
       <p><strong>Name:</strong> {name}</p>
       <p><strong>Email:</strong> {Gmail}</p>
       <p><strong>Contact Number:</strong> {ContactNo}</p>
       <p><strong>Address:</strong> {address}</p>
+      <p><strong>Role:</strong> {role}</p>
 
-      <Link to={`/userdetails/${_id}`}>Update</Link>
-      <button onClick={deleteHandler}>Delete</button>
+      <div className="action-buttons">
+        <Link to={`/userdetails/${_id}`} className="update-btn">Update</Link>
+        <button onClick={deleteHandler} className="delete-btn">Delete</button>
+      </div>
     </div>
   );
 }
