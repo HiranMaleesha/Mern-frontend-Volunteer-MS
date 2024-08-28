@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import './User.css';
 
 function User(props) {
-  const { _id, name, Gmail, ContactNo, address,role } = props.user;
+  const { _id, name, Gmail, ContactNo, address,Role } = props.user;
   const navigate = useNavigate();
 
   const deleteHandler = async () => {
@@ -28,7 +28,7 @@ function User(props) {
       <p><strong>Email:</strong> {Gmail}</p>
       <p><strong>Contact Number:</strong> {ContactNo}</p>
       <p><strong>Address:</strong> {address}</p>
-      <p><strong>Role:</strong> {role}</p>
+      <p><strong>Role:</strong> {Role}</p>
 
       <div className="action-buttons">
         <Link to={`/userdetails/${_id}`} className="update-btn">Update</Link>

@@ -7,8 +7,11 @@ import { useNavigate } from 'react-router-dom';
 const URL = "http://localhost:5000/users";
 
 const fetchHandler = async () => {
-  return await axios.get(URL).then((res) => res.data);
-}
+  const response = await axios.get(URL);
+  console.log(response.data); // Inspect the response
+  return response.data;
+};
+
 
 function UserDetails() {
   const [users, setUsers] = useState([]);
@@ -18,8 +21,12 @@ function UserDetails() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchHandler().then((data) => setUsers(data.users));
-  }, []);
+    fetchHandler().then((data) => {
+        console.log(data.users); // Check if Role is included
+        setUsers(data.users);
+    });
+}, []);
+
 
   const handleSearch = () => {
     fetchHandler().then((data) => {

@@ -11,7 +11,7 @@ function AddUser() {
     Gmail: "",
     ContactNo: "",
     address: "",
-    Role: "" // Added Role to state
+    Role: "" 
   });
 
   const handleChange = (e) => {
@@ -36,7 +36,7 @@ function AddUser() {
         Gmail: String(inputs.Gmail),
         ContactNo: String(inputs.ContactNo),
         address: String(inputs.address),
-        Role: String(inputs.Role) // Added Role to the request
+        Role: String(inputs.Role) 
       }
     ).then(res => res.data);
   }
