@@ -59,6 +59,7 @@ function UpdateUser() {
             <div className="modal-container">
                 <h1>Update User</h1>
                 <form onSubmit={handleSubmit} className="form">
+                    
                     <label>Name:</label>
                     <input
                         type="text"

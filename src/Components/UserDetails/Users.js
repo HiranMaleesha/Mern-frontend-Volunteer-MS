@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import User from '../User/User';
-import './Users.css';
-import { useNavigate } from 'react-router-dom';
+import User from "../User/User";
+import "./Users.css";
+import { useNavigate } from "react-router-dom";
 
 const URL = "http://localhost:5000/users";
 
@@ -11,7 +11,6 @@ const fetchHandler = async () => {
   console.log(response.data); // Inspect the response
   return response.data;
 };
-
 
 function UserDetails() {
   const [users, setUsers] = useState([]);
@@ -22,11 +21,10 @@ function UserDetails() {
 
   useEffect(() => {
     fetchHandler().then((data) => {
-        console.log(data.users); // Check if Role is included
-        setUsers(data.users);
+      console.log(data.users); // Check if Role is included
+      setUsers(data.users);
     });
-}, []);
-
+  }, []);
 
   const handleSearch = () => {
     fetchHandler().then((data) => {
@@ -38,7 +36,7 @@ function UserDetails() {
       setUsers(filteredUsers);
       setNoResults(filteredUsers.length === 0);
     });
-  }
+  };
 
   const handleAddUserClick = () => {
     navigate("/adduser");
@@ -54,11 +52,15 @@ function UserDetails() {
           name="search"
           placeholder="Search User details"
         />
-        <button className='search-btn' onClick={handleSearch}>Search</button>
-        
+        <button className="search-btn" onClick={handleSearch}>
+          Search
+        </button>
+
         <div className="add-user-container">
-  <button className="add-user-btn" onClick={handleAddUserClick}>Add Volunteer</button>
-</div>
+          <button className="add-user-btn" onClick={handleAddUserClick}>
+            Add Volunteer
+          </button>
+        </div>
       </div>
 
       {noResults ? (
@@ -67,14 +69,11 @@ function UserDetails() {
         </div>
       ) : (
         <div className="user-list">
-          {users &&
-            users.map((user, i) => (
-              <User key={i} user={user} />
-            ))}
+          {users && users.map((user, i) => <User key={i} user={user} />)}
         </div>
       )}
     </div>
-  )
+  );
 }
 
 export default UserDetails;

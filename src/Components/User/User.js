@@ -8,10 +8,7 @@ function User(props) {
   const { _id, name, Gmail, ContactNo, address,Role } = props.user;
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate('/volunteer-info');
-  };
-
+  
   const deleteHandler = async () => {
     const userConfirmed = window.confirm("Are you sure you want to delete this volunteer?");
     if (userConfirmed) {
