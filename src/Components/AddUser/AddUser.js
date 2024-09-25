@@ -13,71 +13,102 @@ function AddUser() {
     Role: "",
   });
   const [errors, setErrors] = useState({});
+  const [validFields, setValidFields] = useState({
+    name: false,
+    Gmail: false,
+    ContactNo: false,
+    address: false,
+    Role: false,
+  });
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setInputs((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
-    // Clear the error for this field when the user starts typing
+    validateField(name, value);
+  };
+
+  const validateField = (fieldName, value) => {
+    let isValid = true;
+    let errorMessage = "";
+
+    switch (fieldName) {
+      case "name":
+        if (!value.trim()) {
+          errorMessage = "Name is required";
+          isValid = false;
+        } else if (value.trim().length < 2) {
+          errorMessage = "Name must be at least 2 characters long";
+          isValid = false;
+        } else if (!/^[a-zA-Z\s]*$/.test(value)) {
+          errorMessage = "Name can only contain letters and spaces";
+          isValid = false;
+        }
+        break;
+      case "Gmail":
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!value.trim()) {
+          errorMessage = "Email is required";
+          isValid = false;
+        } else if (!emailRegex.test(value)) {
+          errorMessage = "Invalid email format";
+          isValid = false;
+        }
+        break;
+      case "ContactNo":
+        const phoneRegex = /^\d{10}$/;
+        if (!value.trim()) {
+          errorMessage = "Contact number is required";
+          isValid = false;
+        } else if (!phoneRegex.test(value)) {
+          errorMessage = "Contact number must be 10 digits";
+          isValid = false;
+        }
+        break;
+      case "address":
+        if (!value.trim()) {
+          errorMessage = "Address is required";
+          isValid = false;
+        }
+        break;
+      case "Role":
+        if (!value) {
+          errorMessage = "Please select a role";
+          isValid = false;
+        }
+        break;
+      default:
+        break;
+    }
+
     setErrors((prevErrors) => ({
       ...prevErrors,
-      [e.target.name]: "",
+      [fieldName]: errorMessage,
+    }));
+
+    setValidFields((prevValidFields) => ({
+      ...prevValidFields,
+      [fieldName]: isValid,
     }));
   };
 
-  const validateForm = () => {
-    let isValid = true;
-    const newErrors = {};
-
-    // Name validation
-    if (!inputs.name.trim()) {
-      newErrors.name = "Name is required";
-      isValid = false;
-    } else if (inputs.name.trim().length < 2) {
-      newErrors.name = "Name must be at least 2 characters long";
-      isValid = false;
+  const isFieldDisabled = (fieldName) => {
+    const fieldOrder = ["name", "Gmail", "ContactNo", "address", "Role"];
+    const currentIndex = fieldOrder.indexOf(fieldName);
+    
+    for (let i = 0; i < currentIndex; i++) {
+      if (!validFields[fieldOrder[i]]) {
+        return true;
+      }
     }
-
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!inputs.Gmail.trim()) {
-      newErrors.Gmail = "Email is required";
-      isValid = false;
-    } else if (!emailRegex.test(inputs.Gmail)) {
-      newErrors.Gmail = "Invalid email format";
-      isValid = false;
-    }
-
-    // Contact Number validation
-    const phoneRegex = /^\d{10}$/;
-    if (!inputs.ContactNo.trim()) {
-      newErrors.ContactNo = "Contact number is required";
-      isValid = false;
-    } else if (!phoneRegex.test(inputs.ContactNo)) {
-      newErrors.ContactNo = "Contact number must be 10 digits";
-      isValid = false;
-    }
-
-    // Address validation
-    if (!inputs.address.trim()) {
-      newErrors.address = "Address is required";
-      isValid = false;
-    }
-
-    // Role validation
-    if (!inputs.Role) {
-      newErrors.Role = "Please select a role";
-      isValid = false;
-    }
-
-    setErrors(newErrors);
-    return isValid;
+    return false;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
+    if (Object.values(validFields).every(Boolean)) {
       console.log(inputs);
       await sendRequest();
       window.alert("User added successfully!");
@@ -102,7 +133,7 @@ function AddUser() {
   return (
     <div className="modal-overlay">
       <div className="modal-container">
-        <h1>Add User </h1>
+        <h1>Add User</h1>
 
         <form onSubmit={handleSubmit} className="form">
           <label>Name:</label>
@@ -122,6 +153,7 @@ function AddUser() {
             onChange={handleChange}
             value={inputs.Gmail}
             required
+            disabled={isFieldDisabled("Gmail")}
           />
           {errors.Gmail && <span className="error">{errors.Gmail}</span>}
 
@@ -132,6 +164,7 @@ function AddUser() {
             onChange={handleChange}
             value={inputs.ContactNo}
             required
+            disabled={isFieldDisabled("ContactNo")}
           />
           {errors.ContactNo && (
             <span className="error">{errors.ContactNo}</span>
@@ -144,6 +177,7 @@ function AddUser() {
             onChange={handleChange}
             value={inputs.address}
             required
+            disabled={isFieldDisabled("address")}
           />
           {errors.address && <span className="error">{errors.address}</span>}
 
@@ -153,6 +187,7 @@ function AddUser() {
             onChange={handleChange}
             value={inputs.Role}
             required
+            disabled={isFieldDisabled("Role")}
           >
             <option value="" disabled>
               Select a role
@@ -165,7 +200,9 @@ function AddUser() {
           </select>
           {errors.Role && <span className="error">{errors.Role}</span>}
 
-          <button className="submit-btn">Submit</button>
+          <button className="submit-btn" disabled={!Object.values(validFields).every(Boolean)}>
+            Submit
+          </button>
         </form>
       </div>
     </div>
